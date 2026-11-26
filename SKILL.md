@@ -1,6 +1,10 @@
 ---
 name: agent-rules-tuner
 description: 跨代理通用的全局与项目规则调优器（支持 Claude Code、Codex、Antigravity 等）。当用户要求记住长期偏好、纠正编码习惯、优化/审计全局或项目提示词，或在任务中沉淀可复用规则时使用。内置上下文工程防膨胀规范，自动适配 Magpie 统一指令库或原生规则文件，支持异步/收尾更新与会话内立即接力生效。
+license: MIT
+metadata:
+  author: lucosophy
+  version: "1.0.0"
 ---
 
 # Agent Rules Tuner

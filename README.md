@@ -9,6 +9,19 @@
 - **异步与免重启接力**：支持在主任务收尾或后台 subagent 中异步持久化，并在当前对话上下文中立即重申新规则以实现免退出生效。
 - **零外部脚本依赖**：纯 Markdown 构成，跨 Windows / macOS / Linux 通用。
 
+## 安装方式
+
+### 方式一：通过 `skills` CLI 安装（推荐）
+```sh
+npx skills add lucosophy/agent-rules-tuner
+```
+
+### 方式二：通过 Magpie 安装
+在 Magpie 应用的 **Library › Skills** 中添加 GitHub 仓库 `lucosophy/agent-rules-tuner`（或完整仓库 URL），随后即可一键分发至已配置的所有 Agent，并通过 `magpie library skill update` 拉取更新。
+
+### 方式三：手动安装
+将本仓库克隆或复制到通用 Skills 目录（如 `~/.agents/skills/agent-rules-tuner`）或各工具对应的 `skills/` 目录即可。
+
 ## 遵循的行业标准与参考规范
 
 本 Skill 的结构与规则治理逻辑遵循以下公开标准与最佳实践（维护时请定期对照上游更新）：
