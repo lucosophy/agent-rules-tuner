@@ -2,11 +2,11 @@
 
 [English](README.md) | 简体中文
 
-跨编码代理通用的全局与项目规则调优 Skill（兼容 Claude Code、Codex、Antigravity 等），用于从日常开发对话中安全沉淀编码偏好，同时防止提示词越改越臃肿或产生过拟合副作用。
+面向任意 AI 编码代理的通用全局与项目规则调优 Skill（适用于所有支持 `AGENTS.md` 或原生规则文件的代理，如 Claude Code、Codex、Antigravity、Cursor、Copilot 等），用于从日常开发对话中安全沉淀编码偏好，同时防止提示词越改越臃肿或产生过拟合副作用。
 
 ## 核心特性
 
-- **双模环境适配**：自动检测本机是否使用 [Magpie](https://usemagpie.ai)（优先通过 `magpie library instructions` 统一同步），无 Magpie 时自动回退到原生配置文件与标记块增量更新。
+- **双模环境适配**：自动检测本机是否使用 [Magpie](https://usemagpie.ai)（通过 `magpie library instructions` 统一同步至所有托管代理）；无 Magpie 时默认只维护当前正在使用的代理自身规则文件（按需通过标记块增量同步）。
 - **内置上下文工程护栏**：通过“信号隔离 + 三次法则 + 30 行注意力预算 + 一进一出合并”，防止把一次性指令或偶发报错写成全局铁律。
 - **纯异步非阻塞与会话内接力**：默认派发后台子代理（继承主模型保证准确率）静默写入，仅在规则冲突或超预算时唤醒主代理确认；当前会话直接按新偏好生效。
 - **零外部脚本依赖**：纯 Markdown 构成，跨 Windows / macOS / Linux 通用。

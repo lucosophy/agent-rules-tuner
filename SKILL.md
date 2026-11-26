@@ -1,6 +1,6 @@
 ---
 name: agent-rules-tuner
-description: Cross-agent global & project rules tuner for Claude Code, Codex, Antigravity, etc. Use when saving long-term coding preferences, tuning/auditing AGENTS.md/CLAUDE.md/GEMINI.md, or preventing instruction bloat via Context Engineering. 跨代理通用的全局与项目规则调优器，内置防膨胀规范，支持 Magpie 与原生环境及异步/会话内接力生效。
+description: Universal global & project rules tuner for AI coding agents. Use when saving long-term coding preferences, tuning/auditing agent rules (AGENTS.md, CLAUDE.md, GEMINI.md, etc.), or preventing instruction bloat via Context Engineering. 面向任意 AI 编码代理的通用规则调优器，内置防膨胀规范，支持 Magpie 与原生环境及异步/会话内接力生效。
 license: MIT
 metadata:
   author: lucosophy
@@ -38,7 +38,7 @@ metadata:
 ### 2. 环境探测与持久化
 
 #### 场景 A：项目级规则
-1. 探测项目根目录已有规则文件：`AGENTS.md`、`CLAUDE.md`、`GEMINI.md`（若均不存在，优先新建 `AGENTS.md`）。
+1. 探测项目根目录已有规则文件（如 `AGENTS.md`、`CLAUDE.md`、`GEMINI.md` 或 `.cursor/rules/` 等；若均不存在，优先按开放标准新建 `AGENTS.md`）。
 2. 查重并局部更新，保留原有结构与注释；无版本控制保护时先保存 `.bak` 备份。
 
 #### 场景 B：全局级规则（自动适配 Magpie / 原生环境）
@@ -50,16 +50,13 @@ metadata:
      ```sh
      magpie library instructions set <tmp-file>
      ```
-     （Magpie 会自动备份旧文件到 `~/.config/magpie/backups/` 并同步到已配置的代理）。
+     （Magpie 会自动备份旧文件到 `~/.config/magpie/backups/` 并同步到它托管的所有代理）。
   3. **桌面端兼容检查**：若本机存在 `~/.gemini/GEMINI.md`（部分桌面端直接读取该路径而非 `~/.gemini/config/GEMINI.md`），同步更新其内容以保持一致。
 
-- **无 Magpie 模式（通用兜底）**：
-  1. 扫描本机实际存在的全局规则文件：
-     - `~/.codex/AGENTS.md`
-     - `~/.claude/CLAUDE.md`
-     - `~/.gemini/GEMINI.md` / `~/.gemini/config/GEMINI.md`
-  2. 修改前为每个待改文件生成 `.bak` 备份。
-  3. 使用 `<!-- agent-rules-tuner:begin -->` / `<!-- agent-rules-tuner:end -->` 标记块增量同步，避免覆盖各端专属配置（如 `@RTK.md`）。
+- **无 Magpie 模式（通用原生兜底）**：
+  1. 默认仅定位并更新**当前正在运行的代理自身**对应的全局规则文件（不跨工具乱改）；仅当用户明确要求“同步到本机所有工具”时，才扫描并同步其他已存在的全局规则文件。
+  2. 修改前为待改文件生成 `.bak` 备份。
+  3. 仅局部增删或使用 `<!-- agent-rules-tuner:begin -->` / `<!-- agent-rules-tuner:end -->` 标记块增量更新，避免破坏用户原有结构与专属配置。
 
 ### 3. 反馈与非阻塞收尾
 

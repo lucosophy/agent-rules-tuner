@@ -2,11 +2,11 @@
 
 English | [简体中文](README.zh-CN.md)
 
-A cross-agent global and project rules tuner skill (compatible with Claude Code, Codex, Antigravity, Cursor, Copilot, etc.) with built-in **Context Engineering** guardrails to persist coding preferences safely without instruction bloat or overfitting.
+A universal global and project rules tuner skill for AI coding agents (works with any agent supporting `AGENTS.md` or native rule files, such as Claude Code, Codex, Antigravity, Cursor, Copilot, etc.) with built-in **Context Engineering** guardrails to persist coding preferences safely without instruction bloat or overfitting.
 
 ## Key Features
 
-- **Dual-Mode Environment Adapter**: Automatically detects [Magpie](https://usemagpie.ai) (syncing via `magpie library instructions`) and falls back seamlessly to native rule files (`~/.codex/AGENTS.md`, `~/.claude/CLAUDE.md`, `~/.gemini/GEMINI.md`) using `<!-- agent-rules-tuner:begin/end -->` marker blocks.
+- **Dual-Mode Environment Adapter**: Automatically detects [Magpie](https://usemagpie.ai) (syncing via `magpie library instructions` across all managed agents) and falls back seamlessly to updating the active agent's own native global/project rule file (`<!-- agent-rules-tuner:begin/end -->` marker blocks when syncing across tools).
 - **Built-in Context Engineering Guardrails**: Enforces signal isolation (ephemeral requests vs. persistent preferences), the Rule of Three, a 30-line attention budget, and consolidate-before-append pruning.
 - **Non-Blocking Async & In-Session Relay**: Dispatches background subagents (inheriting the lead model for accuracy) without blocking the user's primary workflow, staying silent on clean writes and waking the lead agent only on conflicts.
 - **Zero Script Dependencies**: Pure Markdown following the open Agent Skills specification—works out of the box on Windows, macOS, and Linux.
